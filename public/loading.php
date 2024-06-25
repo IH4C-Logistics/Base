@@ -1,3 +1,36 @@
+<?php
+
+try{
+
+require('db/dbpdo.php');
+session_start();
+
+$name = "エルフーズ横須賀工場";
+
+//$sql1 = "SELECT * FROM t_reservation WHERE b_name = '".$name."'";
+//$stmt1 = $dbh->prepare($sql1);  
+//$stmt1->execute();
+//$name1 = $stmt1->fetchAll();
+
+
+ 
+$sql = ("SELECT * FROM t_reservation where 1"); 
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sql2 = ("SELECT * FROM t_reservation where status = '準備完了'"); 
+$stmt2 = $dbh->prepare($sql2);
+$stmt2->execute();
+$result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+
+}catch (PDOException $e) {
+  exit('データベースに接続できませんでした。' . $e->getMessage());
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -18,16 +51,15 @@
       <div class="firsttable">
         <table>
           <tr>
-            <th>タイトル</th>
+            <th>予約番号</th>
           </tr>
-          <tr><td>aaaaaaa</td></tr>
-          <tr><td>aaaaaaa</td></tr>
-          <tr><td>aaaaaaa</td></tr>
-          <tr><td>aaaaaaa</td></tr>
-          <tr><td>aaaaaaa</td></tr>
-          <tr><td>aaaaaaa</td></tr>
-          <tr><td>aaaaaaa</td></tr>
-          <tr><td>aaaaaaa</td></tr>
+          
+          <?php foreach ($result2 as $item): ?>
+
+          <tr><td><?php echo $item['contract_num']; ?></td></tr>
+          
+          <?php endforeach; ?>
+          
           <tr>
             <td id="pagenumber">1/1ページ</td>
           </tr>
@@ -37,67 +69,29 @@
       <div class="secondtable">
         <table>
             <tr>
-                <th>タイトル１</th>
-                <th>タイトル２</th>
-                <th>タイトル３</th>
+                <th>到着予定</th>
+                <th>予約番号</th>
+                <th>ステータス</th>
                 <th></th>
             </tr>
+
+            <?php foreach ($result as $item): ?>
+
             <tr>
-                <td id="kisu">1/1</td>
-                <td id="kisu">2/1</td>
-                <td id="kisu">3/1</td>
+                <td id="kisu"><?php echo $item['a_time'];       ?></td>
+                <td id="kisu"><?php echo $item['contract_num']; ?></td>
+                <td id="kisu">
+                  <?php if($item['status'] == "到着受付"){
+                            echo "到着受付";
+                        } else {
+                            echo "準備完了";
+                        } ?>
+                 </td>
                 <td id="kisu">しばらくお待ちください。</td>
             </tr>
-            <tr>
-                <td>1/2</td>
-                <td>2/2</td>
-                <td>3/2</td>
-                <td>しばらくお待ちください。</td>
-            </tr>
-            </tr>
-            <tr>
-                <td id="kisu">1/3</td>
-                <td id="kisu">2/3</td>
-                <td id="kisu">3/3</td>
-                <td id="kisu">しばらくお待ちください。</td>
-            </tr>
-            <tr>
-                <td>1/4</td>
-                <td>2/4</td>
-                <td>3/4</td>
-                <td>しばらくお待ちください。</td>
-            </tr>
-            </tr>
-            <tr>
-                <td id="kisu">1/5</td>
-                <td id="kisu">2/5</td>
-                <td id="kisu">3/5</td>
-                <td id="kisu">しばらくお待ちください。</td>
-            </tr>
-            <tr>
-                <td>1/6</td>
-                <td>2/6</td>
-                <td>3/6</td>
-                <td>しばらくお待ちください。</td>
-            </tr>
-            <tr>
-                <td id="kisu">1/6</td>
-                <td id="kisu">2/6</td>
-                <td id="kisu">3/6</td>
-                <td id="kisu">しばらくお待ちください。</td>
-            </tr>
-            <tr>
-                <td>1/6</td>
-                <td>2/6</td>
-                <td>3/6</td>
-                <td>しばらくお待ちください。</td>
-            </tr>
-            <tr>
-                <td id="kisu">1/6</td>
-                <td id="kisu">2/6</td>
-                <td id="kisu">3/6</td>
-                <td id="kisu">しばらくお待ちください。</td>
-            </tr>
+
+            <?php endforeach; ?>
+            
             <tr>
             <td colspan="4" id="pagenumber">1/1ページ</td>
             </tr>

@@ -1,3 +1,19 @@
+<?php
+
+
+try{
+
+require('db/dbpdo.php');
+session_start();
+
+echo"aaaaaa";
+
+}catch (PDOException $e) {
+  exit('データベースに接続できませんでした。' . $e->getMessage());
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
