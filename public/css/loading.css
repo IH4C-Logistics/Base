@@ -20,7 +20,7 @@
 }
 
 body {
-  background-color: #dcdcdc37;
+  background-color: #f0f0f0;
   width: 100%;
   height: 100vh;
 }
@@ -29,24 +29,36 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-}
-
-.container h2 {
-  font-size: 200%;
-  font-weight: bold;
-  padding: 0 auto;
+  height: 100vh;
 }
 
 .container div {
-  height: 60%;
   display: flex;
-  direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: end;
 }
 
+.container div div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.second {
+  margin-left: 30px;
+}
+.second h2 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.container p {
+  font-size: small;
+}
+
 .secondtable {
-  padding-left: 20px;
 }
 
 table th {
@@ -57,16 +69,36 @@ table th {
   font-weight: bold;
 }
 table td {
+  position: relative;
   padding: 8px 30px;
   border: solid 1px black;
   background: white;
   font-size: large;
 }
 #kisu {
-  background: #dcdcdc;
+  background: #eee;
 }
+
+.button {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: 3px;
+  top: 3px;
+  background-color: #f0f0f0;
+}
+.button:hover {
+  background-color: #ccc;
+}
+img {
+  height: 90%;
+  position: relative;
+  left: -6px;
+  top: 1px;
+}
+
 #pagenumber {
-  background-color: #dcdcdc37;
+  background-color: #e0e0e0;
   border: none;
   font-weight: 100;
   font-size: 75%;

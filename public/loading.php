@@ -48,57 +48,108 @@ $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
   
   <div class="container">
     <div>
-      <div class="firsttable">
-        <table>
-          <tr>
-            <th>予約番号</th>
-          </tr>
-          
-          <?php foreach ($result2 as $item): ?>
-
-          <tr><td><?php echo $item['contract_num']; ?></td></tr>
-          
-          <?php endforeach; ?>
-          
-          <tr>
-            <td id="pagenumber">1/1ページ</td>
-          </tr>
-        </table>
+      <div class="first">
+        <p>以下の番号の方は、</br>受付にお声掛けください</p>
+        <div class="firsttable">
+          <table id="reservationTable">
+            <tr>
+              <th>予約番号</th>
+            </tr>
+            <?php foreach ($result2 as $item): ?>
+            <tr><td><?php echo $item['contract_num']; ?></td></tr>
+            <?php endforeach; ?>
+            <tr>
+              <td id="pagenumber">1/1ページ</td>
+            </tr>
+          </table>
+        </div>
       </div>
 
-      <div class="secondtable">
-        <table>
-            <tr>
-                <th>到着予定</th>
-                <th>予約番号</th>
-                <th>ステータス</th>
-                <th></th>
-            </tr>
-
-            <?php foreach ($result as $item): ?>
-
-            <tr>
+      <div class="second">
+        <h2>A物流拠点</h2>
+        <div class="secondtable">
+          <table id="arrivalTable">
+              <tr>
+                  <th>到着予定</th>
+                  <th>予約番号</th>
+                  <th>ステータス</th>
+                  <th></th>
+              </tr>
+              <?php foreach ($result as $item): ?>
+              <tr>
                 <td id="kisu"><?php echo $item['a_time'];       ?></td>
                 <td id="kisu"><?php echo $item['contract_num']; ?></td>
-                <td id="kisu">
+                <td id="kisu" class="situation">
                   <?php if($item['status'] == "到着受付"){
                             echo "到着受付";
                         } else {
                             echo "準備完了";
                         } ?>
-                 </td>
+                  <button class="button" onclick="toggleStatus(this)"><img src="images/24960681.png" alt="change"></button>
+                </td>
                 <td id="kisu">しばらくお待ちください。</td>
-            </tr>
-
-            <?php endforeach; ?>
-            
-            <tr>
-            <td colspan="4" id="pagenumber">1/1ページ</td>
-            </tr>
-        </table>
+              </tr>
+              <?php endforeach; ?>
+              <tr>
+              <td colspan="4" id="pagenumber">1/1ページ</td>
+              </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
+
+  <script>
+    function toggleStatus(button) {
+    // ボタンの親要素の<td>を取得
+    var td = button.parentNode;
+    
+    // 現在の状態を取得
+    var currentStatus = td.childNodes[0].nodeValue.trim();
+    
+    // 状態を切り替え
+    if (currentStatus === "到着受付") {
+        td.childNodes[0].nodeValue = "準備完了";
+    } else {
+        td.childNodes[0].nodeValue = "到着受付";
+    }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+    var table = document.getElementById("reservationTable");
+    var rows = table.getElementsByTagName("tr");
+    
+    // Get the number of rows excluding the header and footer
+    var dataRows = rows.length - 2; // 1 for header, 1 for footer
+
+    // Calculate how many empty rows are needed
+    var emptyRowsNeeded = 9 - dataRows;
+
+    // Add empty rows if needed
+    for (var i = 0; i < emptyRowsNeeded; i++) {
+        var newRow = table.insertRow(rows.length - 1); // Insert before the last row (footer)
+        var newCell = newRow.insertCell(0);
+        newCell.innerHTML = "&nbsp;"; // Use non-breaking space for empty cell
+    }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    var table = document.getElementById("arrivalTable");
+    var rows = table.getElementsByTagName("tr");
+    
+    var dataRows = rows.length - 2; // 1 for header, 1 for footer
+
+    var emptyRowsNeeded = 10 - dataRows;
+
+    for (var i = 0; i < emptyRowsNeeded; i++) {
+        var newRow = table.insertRow(rows.length - 1); // Insert before the last row (footer)
+        for (var j = 0; j < 4; j++) {
+            var newCell = newRow.insertCell(j);
+            newCell.innerHTML = "&nbsp;"; // Use non-breaking space for empty cell
+        }
+    }
+    });
+</script>
 
 </body>
 </html>
