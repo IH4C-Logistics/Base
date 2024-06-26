@@ -7,19 +7,23 @@ session_start();
 
 $name = "エルフーズ横須賀工場";
 
-//$sql1 = "SELECT * FROM t_reservation WHERE b_name = '".$name."'";
-//$stmt1 = $dbh->prepare($sql1);  
-//$stmt1->execute();
-//$name1 = $stmt1->fetchAll();
-
-
+$sql1 = "SELECT * FROM t_reservation WHERE b_name = '".$name."'";
+$stmt1 = $dbh->prepare($sql1);  
+$stmt1->execute();
+$name1 = $stmt1->fetchAll();
  
-$sql = ("SELECT * FROM t_reservation where 1"); 
-$stmt = $dbh->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// $sql = ("SELECT * FROM t_reservation where 1"); 
+// $stmt = $dbh->prepare($sql);
+// $stmt->execute();
+// $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$sql2 = ("SELECT * FROM t_reservation where status = '準備完了'"); 
+ $sql = ("SELECT * FROM `t_reservation` ORDER BY CAST(`a_time` AS TIME) ASC"); 
+ $stmt = $dbh->prepare($sql);
+ $stmt->execute();
+ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+$sql2 = ("SELECT * FROM t_reservation where status = '1'"); 
 $stmt2 = $dbh->prepare($sql2);
 $stmt2->execute();
 $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
@@ -80,13 +84,23 @@ $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
                 <td id="kisu"><?php echo $item['a_time'];       ?></td>
                 <td id="kisu"><?php echo $item['contract_num']; ?></td>
                 <td id="kisu" class="situation">
-                  <?php if($item['status'] == "到着受付"){
-                            echo "到着受付";
-                        } else {
-                            echo "準備完了";
-                        } ?>
-                  <button class="button" onclick="toggleStatus(this)"><img src="images/24960681.png" alt="change"></button>
+
+                <?php 
+                $status = $item['status'];
+                $yoyaku = $item['contract_num'];
+                  switch($status){
+                    case 0:
+                      echo "到着受付";?>
+                      <a href="db/statusreception.php?yoyakuID=<?php echo $yoyaku; ?>" class="button"><img src="images/24960681.png" alt="change"></a>
                 </td>
+                <?php 
+                    break;
+                  case 1:
+                    echo "準備完了";?>
+                    <a href="db/statusarrival.php?yoyakuID=<?php echo $yoyaku; ?>" class="button"><img src="images/24960681.png" alt="change"></a>
+              <?php break;}
+                ?>
+
                 <td id="kisu">しばらくお待ちください。</td>
               </tr>
               <?php endforeach; ?>
@@ -99,7 +113,7 @@ $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 
-  <script>
+  <!-- <script>
     function toggleStatus(button) {
     // ボタンの親要素の<td>を取得
     var td = button.parentNode;
@@ -113,8 +127,9 @@ $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     } else {
         td.childNodes[0].nodeValue = "到着受付";
     }
-    }
+    }-->
 
+    <script>
     document.addEventListener("DOMContentLoaded", function() {
     var table = document.getElementById("reservationTable");
     var rows = table.getElementsByTagName("tr");
@@ -149,7 +164,7 @@ $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         }
     }
     });
-</script>
+</script> 
 
 </body>
 </html>
