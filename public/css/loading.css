@@ -81,20 +81,20 @@ table td {
 
 .button {
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 23px;
+  height: 23px;
   right: 3px;
   top: 3px;
   background-color: #f0f0f0;
+  border: solid 2px #333;
 }
 .button:hover {
   background-color: #ccc;
 }
 img {
-  height: 90%;
+  height: 80%;
   position: relative;
-  left: -6px;
-  top: 1px;
+  top: 2px;
 }
 
 #pagenumber {
