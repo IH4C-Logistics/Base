@@ -1,0 +1,55 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.message:last-child {
+    border-bottom: none; /* Remove border bottom from the last message */
+}
+
+.message-content {
+    max-width: 70%; /* Limit message width for better readability */
+    word-wrap: break-word; /* Wrap long words */
+}
+
+.received {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.sent {
+    background-color: #dbf7c7;
+    text-align: right;
+}
+
+.sent .message-content {
+    color: #333;
+}
+
+.received .message-content {
+    color: #333;
+}
