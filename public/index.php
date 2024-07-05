@@ -10,6 +10,7 @@
 <body>
     <nav class="header">
         <p>A物流拠点</p>
+        <a href="chat.php">chat</a>
         <a class="login_window">ログイン</a>
     </nav>
 

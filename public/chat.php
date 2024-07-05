@@ -29,7 +29,7 @@ try{
     // $driver = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     }catch (PDOException $e) {
-      exit('データベースに接続できませんでした。' . $e->getMessage());
+        exit('データベースに接続できませんでした。' . $e->getMessage());
     }
 ?>
 <!DOCTYPE html>
@@ -38,56 +38,55 @@ try{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Example</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
-<table>
-    <?php 
-//ドライバー選択
-foreach($user as $item):?>
-    <tr>
-        <td>
-            <?php
-            echo($item['u_Name']); 
+
+    <nav class="header">
+        <a href="index.php">戻る</a>
+    </nav>
+
+    <main>
+        <div class="driverselect">
+            <?php 
+            //ドライバー選択
+            foreach($user as $item):?>
+            <div>
+                <?php $user = $item['u_Id']; ?>
+                <a href="chat.php?userID=<?php echo $user; ?>" class="button">
+                    <?php echo($item['u_Name']); ?>
+                </a>
+            </div>
+        <?php
+            endforeach;
             ?>
-        </td>
-        <td>
-            <?php $user = $item['u_Id']; ?>
-        <a href="chat.php?userID=<?php echo $user; ?>" class="button"><?php
-            echo($item['u_Name']); 
-            ?></a>
-        </td>
-    </tr>
-<?php
-endforeach;?>
-</table><?php
-//chat表示
-     foreach ($chat as $item): ?>
-        <?php if($item['player'] == 1){?>
-            <div class="message sent">
-            <div class="message-content">
-          <?php  echo $item['text'];?>
-          </div>
-          </div>
-          <?php
-        } else{?>
-    <div class="chat-container">
-        <div class="message received">
-            <div class="message-content">
-           <?php echo $item['text']; ?>
-           </div>
-           </div>
-        <?php }?>
-    <?php endforeach;?>
-
- <form method="post" action="db/text.php">
-    <input type="text" value="<?php echo $chatid; ?>" name="test"  hidden>
- <input type="text" name="text">
-<input type="submit" value="＞">
-
- </form>
-
         </div>
-    </div>
+        
+        <div class="chat-container">
+            <?php
+            //chat表示
+            foreach ($chat as $item): ?>
+            <?php if($item['player'] == 1){?>
+            <div class="base">
+                <div class="message-content">
+                    <?php echo $item['text'];?>
+                </div>
+            </div>
+            <?php
+            } else{?>
+            <div class="driver">
+                <div class="message-content">
+                    <?php echo $item['text']; ?>
+                </div>
+            </div>
+            <?php }?>
+            <?php endforeach;?>
+                <form method="post" action="db/text.php">
+                    <input type="text" value="<?php echo $chatid; ?>" name="test"  hidden>
+                    <input type="text" name="text">
+                    <input type="submit" value="＞">
+                </form>
+        </div>
+    </main>
 </body>
 </html>
