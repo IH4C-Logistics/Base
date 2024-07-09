@@ -1,12 +1,13 @@
 <?php
+
 try{
 
     require('db/dbpdo.php');
-
-    if($_GET['userID'] != NULL){
+    $userID = isset($_GET['userID']);
+    if($userID != NULL){
         $chatid = $_GET['userID'];
         }else{
-            echo "ないよ";
+            $chatid = 2;
         }
     
     $sql = ("SELECT * FROM `t_chat` WHERE `player` = '".$chatid."' OR `c_Partner` = '".$chatid."' ORDER BY CAST(`time` AS TIME) ASC"); 
@@ -31,6 +32,7 @@ try{
     }catch (PDOException $e) {
         exit('データベースに接続できませんでした。' . $e->getMessage());
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +56,8 @@ try{
             <div>
                 <?php $user = $item['u_Id']; ?>
                 <a href="chat.php?userID=<?php echo $user; ?>" class="button">
-                    <?php echo($item['u_Name']); ?>
+                    <h4><?php echo($item['u_Name']); ?></h4>
+                    <p>最新のチャット入れたいね♡</p>
                 </a>
             </div>
         <?php
@@ -63,29 +66,33 @@ try{
         </div>
         
         <div class="chat-container">
-            <?php
-            //chat表示
-            foreach ($chat as $item): ?>
-            <?php if($item['player'] == 1){?>
-            <div class="base">
-                <div class="message-content">
-                    <?php echo $item['text'];?>
+            <div class="chcon" id="chatContent">
+                <?php
+                //chat表示
+                foreach ($chat as $item): ?>
+                <?php if($item['player'] == 1){?>
+                <div class="base">
+                    <div class="message-content">
+                        <?php echo $item['text'];?>
+                    </div>
                 </div>
-            </div>
-            <?php
-            } else{?>
-            <div class="driver">
-                <div class="message-content">
-                    <?php echo $item['text']; ?>
+                <?php
+                } else{?>
+                <div class="driver">
+                    <div class="message-content">
+                        <?php echo $item['text']; ?>
+                    </div>
                 </div>
+                <?php }?>
+                <?php endforeach;?>
             </div>
-            <?php }?>
-            <?php endforeach;?>
+            <div class="form">
                 <form method="post" action="db/text.php">
                     <input type="text" value="<?php echo $chatid; ?>" name="test"  hidden>
-                    <input type="text" name="text">
-                    <input type="submit" value="＞">
+                    <input type="text" name="text" placeholder="Type your message here">
+                    <input type="image" src="images/22633428.png" alt="send" class="sendimg" value="">
                 </form>
+            </div>
         </div>
     </main>
 </body>
