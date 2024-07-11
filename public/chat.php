@@ -3,6 +3,19 @@
 try{
 
     require('db/dbpdo.php');
+    session_start();
+    //物流IDがSESSIONに登録されているか確認
+    if(isset($_SESSION['u_name'])){
+        $buturyu_name = $_SESSION['u_name'][0];
+        $sql = "SELECT u_Id FROM t_user WHERE u_Name = '". $buturyu_name ."'";
+        $stmt = $dbh->prepare($sql);  
+        $stmt->execute();
+        $buturyu_id = $stmt->fetchAll();
+        $buturyu_id1 = $buturyu_id[0][0];
+      }else{
+        echo "拠点名が入ってないよ";
+      }
+
     $userID = isset($_GET['userID']);
     if($userID != NULL){
         $chatid = $_GET['userID'];
@@ -15,8 +28,8 @@ try{
     $stmt->execute();
     $chat = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-
-    $sql = ("SELECT * FROM `t_user` where u_Id != '1'"); 
+    //ドライバー一覧
+    $sql = ("SELECT * FROM `t_user` where u_administrator = '0'"); 
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -67,10 +80,11 @@ try{
         
         <div class="chat-container">
             <div class="chcon" id="chatContent">
-                <?php
+                <?php 
                 //chat表示
                 foreach ($chat as $item): ?>
-                <?php if($item['player'] == 1){?>
+                <?php if($item['player'] == $buturyu_id1 OR $item['c_Partner'] == $buturyu_id1) {?>
+                <?php if($item['player'] == $buturyu_id1){?>
                 <div class="base">
                     <div class="message-content">
                         <?php echo $item['text'];?>
@@ -84,12 +98,13 @@ try{
                     </div>
                 </div>
                 <?php }?>
+                <?php } ?>
                 <?php endforeach;?>
             </div>
             <div class="form">
                 <form method="post" action="db/text.php">
                     <input type="text" value="<?php echo $chatid; ?>" name="test"  hidden>
-                    <input type="text" name="text" placeholder="Type your message here">
+                    <input type="text" name="text" placeholder="Type your message here" required>
                     <input type="image" src="images/22633428.png" alt="send" class="sendimg" value="">
                 </form>
             </div>

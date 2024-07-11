@@ -1,3 +1,18 @@
+<?php
+session_start();
+if(isset($_SESSION['error'])){
+    $error = $_SESSION['error'][0];
+  }else{
+    $error = "error";
+  }
+
+if(isset($_SESSION['u_name'])){
+  $loginuser = $_SESSION['u_name'][0];
+}else{
+  $loginuser = "なし";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,7 +24,7 @@
 </head>
 <body>
     <nav class="header">
-        <p>A物流拠点</p>
+        <p><?php echo $loginuser; ?></p>
         <a href="chat.php">chat</a>
         <a class="login_window">ログイン</a>
     </nav>
@@ -17,7 +32,7 @@
     <div class="modal"></div>
     <div class="login_modal">
     <h2>ログイン</h2>
-        <form id="login_form">
+        <form id="login_form" method="POST" action="logincheck.php">
             <label for="baseid">物流拠点ID</label>
             <input type="text" id="baseid" name="baseid" required>
             <label for="password">パスワード</label>
