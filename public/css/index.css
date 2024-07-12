@@ -93,6 +93,39 @@ body {
   background-color: #d0d0d0;
 }
 
+.logout_modal {
+  display: none;
+  position: fixed;
+  z-index: 15;
+  top: 40%;
+  left: 50%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-transform: translate(-50%, -10%);
+  transform: translate(-50%, -10%);
+  color: #333;
+  font-size: 1.3rem;
+}
+
+#logout_form {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 20px;
+}
+
+#logout_form button {
+  width: 80px;
+  padding: 10px;
+  border: none;
+  background-color: #999;
+  border-radius: 5px;
+}
+#logout_form button:hover {
+  background-color: #bbb;
+}
+
 .container {
   display: flex;
   justify-content: space-around;
