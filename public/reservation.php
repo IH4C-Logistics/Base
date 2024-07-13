@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/reservation.css">
   <title>予約状況管理</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./js/updatelist.js"></script>
 </head>
 <body>
 
@@ -47,11 +48,11 @@
               </div>
               <div>
                 <label for="textbox3">着日付</label>
-                <input type="text" name="a_date" id="textbox3">
+                <input type="date" name="a_date" id="textbox3">
               </div>
               <div>
                 <label for="textbox4">着時間</label>
-                <input type="text" name="a_time" id="textbox4">
+                <input type="time" name="a_time" id="textbox4">
               </div>
               <div>
                 <label for="textbox5">運送会社</label>
@@ -95,7 +96,7 @@
       <div class="con">
         <div>
           <h2 class="title">現在予約済みの予約情報</h2>
-          <div class="scrollable-container">
+          <div class="scrollable-container" id="reservationContainer">
             <?php if (isset($result) && count($result) > 0): ?>
             <table>
               <tr>
@@ -225,14 +226,8 @@
     }
       ?>
 
-  <!-- ページリロードボタン -->
-  <button id="refreshButton">画面を更新する</button>
 
   <script>
-      // 画面更新処理
-      document.getElementById('refreshButton').addEventListener('click', function() {
-          location.reload();
-      });
 
       $(document).on('click', '.res_window', function() {
           // 背景をスクロールできないように & スクロール場所を維持
