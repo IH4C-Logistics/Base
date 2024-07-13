@@ -13,144 +13,100 @@
     <a href="index.php" class="home">HOME</a>
     <a class="res_window">新規予約</a>
   </nav>
-  
-<?php
-  // データベース情報
-  $host = "localhost"; // データベースのホスト名
-  $username = "root"; // データベースのユーザー名
-  $password = ""; // データベースのパスワード
-  $dbname= "ih4c"; // 使用するデータベース名
+    
+  <?php
+    // データベース情報
+    $host = "localhost"; // データベースのホスト名
+    $username = "root"; // データベースのユーザー名
+    $password = ""; // データベースのパスワード
+    $dbname= "ih4c"; // 使用するデータベース名
 
-  try {
-    // データベース接続情報
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    try {
+      // データベース接続情報
+      $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // データベースから既存の予約を取得
-    $stmt = $pdo->prepare("SELECT * FROM t_reservation");
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
+      // データベースから既存の予約を取得
+      $stmt = $pdo->prepare("SELECT * FROM t_reservation");
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  ?>
 
-  <div class="modal"></div>
-    <div class="res_modal">
-      <h2 class="title2">予約情報追加</h2>
-      <form method="post" action="" enctype="multipart/form-data">
-        <div class="form-container">
-          <div>
-            <label for="textbox1">運送会社</label>
-            <input type="text" name="b_name" id="textbox1">
-          </div>
-          <div>
-            <label for="textbox2">数量</label>
-            <input type="text" name="total_quantity" id="textbox2">
-          </div>
-          <div>
-            <label for="textbox3">重量(kg)</label>
-            <input type="text" name="total_weight_kg" id="textbox3">
-          </div>
-          <div>
-            <label for="textbox4">車番</label>
-            <input type="text" name="car_num" id="textbox4">
-          </div>
-          <div>
-            <label for="textbox5">受注No</label>
-            <input type="text" name="contract_num" id="textbox5">
-          </div>
-          <div>
-            <label for="textbox6">発地</label>
-            <input type="text" name="departure_point" id="textbox6">
-          </div>
-          <div>
-            <label for="textbox7">発日付</label>
-            <input type="text" name="d_date" id="textbox7">
-          </div>
-          <div>
-            <label for="textbox8">発時間</label>
-            <input type="text" name="d_time" id="textbox8">
-          </div>
-          <div>
-            <label for="textbox9">着地</label>
-            <input type="text" name="arrival_point" id="textbox9">
-          </div>
+      <div class="modal"></div>
+        <div class="res_modal">
+          <h2 class="title2">予約情報追加</h2>
+          <form method="post" action="" enctype="multipart/form-data">
+            <div class="form-container">
+              <div>
+                <label for="textbox1">会社名</label>
+                <input type="text" name="b_name" id="textbox1">
+              </div>
+              <div>
+                <label for="textbox2">着地</label>
+                <input type="text" name="arrival_point" id="textbox2">
+              </div>
+              <div>
+                <label for="textbox3">着日付</label>
+                <input type="text" name="a_date" id="textbox3">
+              </div>
+              <div>
+                <label for="textbox4">着時間</label>
+                <input type="text" name="a_time" id="textbox4">
+              </div>
+              <div>
+                <label for="textbox5">運送会社</label>
+                <input type="text" name="trans_comp" id="textbox5">
+              </div>
+              <div>
+                <label for="textbox6">ドライバー名</label>
+                <input type="text" name="driver_name" id="textbox6">
+              </div>
+            </div>
+
+            <div class="form-container2">
+              <div>
+                <label for="textbox7">電話番号</label>
+                <input type="text" name="tel_num" id="textbox7">
+              </div>
+              <div>
+                <label for="textbox8">車番</label>
+                <input type="text" name="car_num" id="textbox8">
+              </div>
+              <div>
+                <label for="textbox9">車格</label>
+                <input type="text" name="vehicle_size" id="textbox9">
+              </div>
+              <div>
+                <label for="textbox10">名義/メーカ名/品名等</label>
+                <input type="text" name="product_name" id="textbox10">
+              </div>
+              <div>
+                <label for="textbox11">数量(ケース数)</label>
+                <input type="text" name="quantity" id="textbox11">
+              </div>
+              <div>
+                <button class="button" type="submit">登録</button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="form-container2">
-            <div>
-              <label for="textbox10">着日付</label>
-              <input type="text" name="a_date" id="textbox10">
-            </div>
-            <div>
-              <label for="textbox11">着時間</label>
-              <input type="text" name="a_time" id="textbox11">
-            </div>
-            <div>
-              <label for="textbox12">温度</label>
-              <input type="text" name="temperature" id="textbox12">
-            </div>
-            <div>
-              <label for="textbox13">荷主名</label>
-              <input type="text" name="shipper_name" id="textbox13">
-            </div>
-            <div>
-              <label for="textbox14">品名</label>
-              <input type="text" name="product_name" id="textbox14">
-            </div>
-            <div>
-              <label for="textbox15">規格</label>
-              <input type="text" name="standard" id="textbox15">
-            </div>
-            <div>
-              <label for="textbox16">数量</label>
-              <input type="text" name="quantity" id="textbox16">
-            </div>
-            <div>
-              <label for="textbox17">重量(kg)</label>
-              <input type="text" name="weight_kg" id="textbox17">
-            </div>
-            <div>
-              <label for="textbox18">予約ステータス</label>
-              <input type="text" name="status" id="textbox18">
-            </div>
-            <div>
-              <button class="button" type="submit">登録</button>
-            </div>
-        </div>
-      </form>
-    </div>
+      </div>
 
-    <div class="con">
-    <div>
-      <h2 class="title">現在予約済みの予約情報</h2>
-      <div class="scrollable-container">
-        <?php if (isset($result) && count($result) > 0): ?>
-          <table>
-            <tr>
-              <?php foreach ($result[0] as $key => $value): ?>
+      <div class="con">
+        <div>
+          <h2 class="title">現在予約済みの予約情報</h2>
+          <div class="scrollable-container">
+            <?php if (isset($result) && count($result) > 0): ?>
+            <table>
+              <tr>
+                <?php foreach ($result[0] as $key => $value): ?>
                 <?php
                   switch ($key) {
-                    case 'b_name':
-                      $header = '運送会社';
-                      break;
-                    case 'total_quantity':
-                      $header = '数量';
-                      break;
-                    case 'total_weight_kg':
-                      $header = '重量(kg)';
-                      break;
-                    case 'car_num':
-                      $header = '車番';
-                      break;
                     case 'contract_num':
-                      $header = '受注No';
+                      $header = '受付番号';
                       break;
-                    case 'departure_point':
-                      $header = '発地';
-                      break;
-                    case 'd_date':
-                      $header = '発日付';
-                      break;
-                    case 'd_time':
-                      $header = '発時間';
+                    case 'b_name':
+                      $header = '会社名';
                       break;
                     case 'arrival_point':
                       $header = '着地';
@@ -161,113 +117,123 @@
                     case 'a_time':
                       $header = '着時間';
                       break;
-                    case 'temperature':
-                      $header = '温度';
+                    case 'trans_comp':
+                      $header = '運搬会社';
                       break;
-                    case 'shipper_name':
-                      $header = '荷主名';
+                    case 'driver_name':
+                      $header = 'ドライバー名';
+                      break;                      
+                    case 'tel_num':
+                      $header = '電話番号';
+                      break;
+                    case 'car_num':
+                      $header = '車番';
+                      break;                
+                    case 'vehicle_size':
+                      $header = '車格';
                       break;
                     case 'product_name':
-                      $header = '品名';
-                      break;
-                    case 'standard':
-                      $header = '規格';
-                      break;
+                      $header = '名義/メーカ名/品名等';
+                      break;  
                     case 'quantity':
-                      $header = '数量';
-                      break;
-                    case 'weight_kg':
-                      $header = '重量(kg)';
+                      $header = '数量(ケース数)';
                       break;
                     case 'status':
-                      $header = '予約状況';
-                      break;
+                      $header = '受付状況';
+                      break;                                              
                     default:
                       $header = $key;
                       break;
                   }
                 ?>
                 <th><?php echo htmlspecialchars($header); ?></th>
-              <?php endforeach; ?>
-            </tr>
-            <?php foreach ($result as $row): ?>
+                <?php endforeach; ?>
+              </tr>
+              <?php foreach ($result as $row): ?>
               <tr>
                 <?php foreach ($row as $value): ?>
                   <td><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></td>
                 <?php endforeach; ?>
               </tr>
-            <?php endforeach; ?>
-          </table>
-        <?php else: ?>
-          データがありません。
-        <?php endif; ?>
+              <?php endforeach; ?>
+            </table>
+            <?php else: ?>
+              データがありません。
+            <?php endif; ?>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <?php
-    // フォームが送信されたかどうかを確認
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && 
-        isset($_POST['b_name'], $_POST['total_quantity'], $_POST['total_weight_kg'], $_POST['car_num'], 
-              $_POST['contract_num'], $_POST['departure_point'], $_POST['d_date'], $_POST['d_time'], 
-              $_POST['arrival_point'], $_POST['a_date'], $_POST['a_time'], $_POST['temperature'], 
-              $_POST['shipper_name'], $_POST['product_name'], $_POST['standard'], $_POST['quantity'], 
-              $_POST['weight_kg'], $_POST['status'])) {
 
-        $b_name = $_POST['b_name'];
-        $total_quantity = $_POST['total_quantity'];
-        $total_weight_kg = $_POST['total_weight_kg'];
-        $car_num = $_POST['car_num'];
-        $contract_num = $_POST['contract_num'];
-        $departure_point = $_POST['departure_point'];
-        $d_date = $_POST['d_date'];
-        $d_time = $_POST['d_time'];
-        $arrival_point = $_POST['arrival_point'];
-        $a_date = $_POST['a_date'];
-        $a_time = $_POST['a_time'];
-        $temperature = $_POST['temperature'];
-        $shipper_name = $_POST['shipper_name'];
-        $product_name = $_POST['product_name'];
-        $standard = $_POST['standard'];
-        $quantity = $_POST['quantity'];
-        $weight_kg = $_POST['weight_kg'];
-        $status = $_POST['status'];
 
-        // t_reservationテーブルに入力した内容を追加
-        $queryins = "INSERT INTO t_reservation(b_name, total_quantity, total_weight_kg, car_num, contract_num, departure_point, d_date, d_time, arrival_point, a_date, a_time, temperature, shipper_name, product_name, standard, quantity, weight_kg, status)
-                    VALUES (:b_name, :total_quantity, :total_weight_kg, :car_num, :contract_num, :departure_point, :d_date, :d_time, :arrival_point, :a_date, :a_time, :temperature, :shipper_name, :product_name, :standard, :quantity, :weight_kg, :status)";
-        $statement = $pdo->prepare($queryins);
-        $statement->bindParam(':b_name', $b_name);
-        $statement->bindParam(':total_quantity', $total_quantity);
-        $statement->bindParam(':total_weight_kg', $total_weight_kg);
-        $statement->bindParam(':car_num', $car_num);
-        $statement->bindParam(':contract_num', $contract_num);
-        $statement->bindParam(':departure_point', $departure_point);
-        $statement->bindParam(':d_date', $d_date);
-        $statement->bindParam(':d_time', $d_time);
-        $statement->bindParam(':arrival_point', $arrival_point);
-        $statement->bindParam(':a_date', $a_date);
-        $statement->bindParam(':a_time', $a_time);
-        $statement->bindParam(':temperature', $temperature);
-        $statement->bindParam(':shipper_name', $shipper_name);
-        $statement->bindParam(':product_name', $product_name);
-        $statement->bindParam(':standard', $standard);
-        $statement->bindParam(':quantity', $quantity);
-        $statement->bindParam(':weight_kg', $weight_kg);
-        $statement->bindParam(':status', $status);
-        $statement->execute();
+      <?php
+        // フォームが送信されたかどうかを確認
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && 
+            isset($_POST['b_name'], $_POST['arrival_point'], $_POST['a_date'], $_POST['a_time'], 
+                  $_POST['trans_comp'], $_POST['driver_name'], $_POST['tel_num'], $_POST['car_num'], $_POST['vehicle_size'], 
+                  $_POST['product_name'],$_POST['quantity'])) {
 
-    } else {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            echo '値が入力されていません';
+            $b_name = $_POST['b_name'];  // 会社名
+            $arrival_point = $_POST['arrival_point'];  // 着地
+            $a_date = $_POST['a_date'];  // 着日付
+            $a_time = $_POST['a_time'];  // 着時間
+            $trans_comp = $_POST['trans_comp'];  // 運搬会社
+            $driver_name = $_POST['driver_name'];  // ドライバー名
+            $tel_num = $_POST['tel_num'];  // 電話番号
+            $car_num = $_POST['car_num'];  // 車番
+            $vehicle_size = $_POST['vehicle_size'];  // 車格
+            $product_name = $_POST['product_name'];  // 名義/メーカ名/品名等
+            $quantity = $_POST['quantity'];  // 数量
+
+
+            // ランダムな10桁の予約番号を生成する関数
+            function generateRandomNumber($length = 10) {
+              $number = '';
+              for ($i = 0; $i < $length; $i++) {
+                  $number .= mt_rand(0, 9);
+              }
+              return $number;
+            }
+
+            // 10桁のランダムな数字を生成して変数に格納
+            $contract_num = generateRandomNumber();
+
+
+            // t_reservationテーブルに入力した内容を追加
+            $queryins = "INSERT INTO t_reservation(contract_num, b_name, arrival_point, a_date, a_time, trans_comp, driver_name, tel_num, car_num, vehicle_size, product_name, quantity,status)
+                        VALUES (:contract_num, :b_name, :arrival_point, :a_date, :a_time, :trans_comp, :driver_name, :tel_num, :car_num, :vehicle_size, :product_name, :quantity, 3)";
+            $statement = $pdo->prepare($queryins);
+            $statement->bindParam(':contract_num', $contract_num);
+            $statement->bindParam(':b_name', $b_name);
+            $statement->bindParam(':arrival_point', $arrival_point);
+            $statement->bindParam(':a_date', $a_date);
+            $statement->bindParam(':a_time', $a_time);
+            $statement->bindParam(':trans_comp', $trans_comp);
+            $statement->bindParam(':driver_name', $driver_name);
+            $statement->bindParam(':tel_num', $tel_num);
+            $statement->bindParam(':car_num', $car_num);
+            $statement->bindParam(':vehicle_size', $vehicle_size);
+            $statement->bindParam(':product_name', $product_name);
+            $statement->bindParam(':quantity', $quantity);
+            $statement->execute();
+        } else {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                echo '値が入力されていません';
+            }
         }
+    } catch (PDOException $e) {
+      echo 'データベース接続エラー: ' . $e->getMessage();
     }
+      ?>
 
-  } catch (PDOException $e) {
-    echo 'データベース接続エラー: ' . $e->getMessage();
-  }
-  ?>
+  <!-- ページリロードボタン -->
+  <button id="refreshButton">画面を更新する</button>
 
   <script>
+      // 画面更新処理
+      document.getElementById('refreshButton').addEventListener('click', function() {
+          location.reload();
+      });
+
       $(document).on('click', '.res_window', function() {
           // 背景をスクロールできないように & スクロール場所を維持
           scroll_position = $(window).scrollTop();
