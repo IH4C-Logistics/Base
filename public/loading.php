@@ -91,6 +91,7 @@ try {
                     </tr>
                     <?php foreach ($result as $item): ?>
                     <tr>
+                        
                         <td id="kisu"><?php echo $item['a_time']; ?></td>
                         <td id="kisu"><?php echo $item['contract_num']; ?></td>
                         <td id="kisu" class="situation">
@@ -105,6 +106,10 @@ try {
                                 case 1:
                                     echo "準備完了"; ?>
                                     <a href="db/statusarrival.php?yoyakuID=<?php echo $yoyaku; ?>" class="button"><img src="images/24960681.png" alt="change"></a>
+                                    <?php break;
+                                case 4:
+                                    echo "受付完了"; ?>
+                                    <a href="db/statusarrival.php?yoyakuID=<?php echo $yoyaku; ?>"></a>
                                     <?php break;
                             }
                         ?>
@@ -137,6 +142,10 @@ try {
                                 case 1:
                                     echo "準備完了"; ?>
                                     <a href="db/statusarrivalmonitor.php?yoyakuID=<?php echo $yoyaku; ?>" class="button"><img src="images/24960681.png" alt="change"></a>
+                                    <?php break;
+                                case 4:
+                                    echo "受付完了"; ?>
+                                    <a href="db/statusarrivalmonitor.php?yoyakuID=<?php echo $yoyaku; ?>"></a>
                                     <?php break;
                             }
                         ?>
