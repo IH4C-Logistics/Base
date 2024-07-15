@@ -17,7 +17,7 @@ try {
     // $stmt->execute();
     // $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = ("SELECT * FROM `t_reservation` ORDER BY CAST(`a_time` AS TIME) ASC"); 
+    $sql = ("SELECT * FROM t_reservation WHERE DATE(a_date) = CURDATE() ORDER BY CAST(a_time AS TIME) ASC"); 
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
