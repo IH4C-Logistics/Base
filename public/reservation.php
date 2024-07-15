@@ -6,7 +6,9 @@
   <link rel="stylesheet" href="css/reservation.css">
   <title>予約状況管理</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./js/updatelist_no.js"></script>
   <script src="./js/updatelist.js"></script>
+
 </head>
 <body>
 
@@ -29,8 +31,11 @@
 
       // データベースから既存の予約を取得
       $stmt = $pdo->prepare("SELECT * FROM t_reservation");
+      $stmt2 = $pdo->prepare("SELECT * FROM t_reserve_no");
       $stmt->execute();
+      $stmt2->execute();
       $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
   ?>
 
       <div class="modal"></div>
@@ -95,7 +100,7 @@
 
       <div class="con">
         <div>
-          <h2 class="title">現在予約済みの予約情報</h2>
+          <h2 class="title">ブラウザ予約情報</h2>
           <div class="scrollable-container" id="reservationContainer">
             <?php if (isset($result) && count($result) > 0): ?>
             <table>
@@ -151,6 +156,70 @@
                 <?php endforeach; ?>
               </tr>
               <?php foreach ($result as $row): ?>
+              <tr>
+                <?php foreach ($row as $value): ?>
+                  <td><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></td>
+                <?php endforeach; ?>
+              </tr>
+              <?php endforeach; ?>
+            </table>
+            <?php else: ?>
+              データがありません。
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="con">
+        <div>
+          <h2 class="title">現地予約情報</h2>
+          <div class="scrollable-container" id="reservationContainer">
+            <?php if (isset($result2) && count($result2) > 0): ?>
+            <table>
+              <tr>
+                <?php foreach ($result2[0] as $key => $value): ?>
+                <?php
+                  switch ($key) {
+                    case 'random_number':
+                      $header = '受付番号';
+                      break;
+                    case 'date':
+                      $header = '予約日付';
+                      break;
+                    case 'p_num':
+                      $header = '電話番号';
+                      break;
+                    case 'b_name':
+                      $header = '運送会社名';
+                      break;
+                    case 'b_driver':
+                      $header = 'ドライバー名';
+                      break;
+                    case 'car_num':
+                      $header = 'ドライバー名';
+                      break;
+                    case 'Vehicle_size':
+                      $header = '車格';
+                      break;
+                    case 'product_name':
+                      $header = '名義/メーカ名/品名等';
+                      break;  
+                    case 'case':
+                      $header = '数量(ケース数)';
+                      break;
+                    case 'status':
+                      $header = '受付状況';
+                      break;                                              
+                    default:
+                      $header = $key;
+                      break;
+                  }
+                ?>
+                <th><?php echo htmlspecialchars($header); ?></th>
+                <?php endforeach; ?>
+              </tr>
+              <?php foreach ($result2 as $row): ?>
               <tr>
                 <?php foreach ($row as $value): ?>
                   <td><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></td>
