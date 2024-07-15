@@ -45,6 +45,14 @@ body {
   align-items: start;
 }
 
+#reservationTable{
+  width: 12vw;
+}
+
+.num{
+  text-align: center;
+}
+
 .second {
   margin-left: 30px;
 }
@@ -78,6 +86,13 @@ table td {
 #kisu {
   background: #eee;
 }
+
+#msg{
+  width: 16vw;
+  text-align: center;
+  background: #eee;
+}
+
 
 .button {
   position: absolute;

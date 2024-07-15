@@ -67,10 +67,10 @@ try {
                         <th>予約番号</th>
                     </tr>
                     <?php foreach ($result2 as $item): ?>
-                    <tr><td><?php echo $item['contract_num']; ?></td></tr>
+                    <tr class="num"><td><?php echo $item['contract_num']; ?></td></tr>
                     <?php endforeach; ?>
                     <?php foreach ($result4 as $item): ?>
-                    <tr><td><?php echo $item['random_number']; ?></td></tr>
+                    <tr class="num"><td><?php echo $item['random_number']; ?></td></tr>
                     <?php endforeach; ?>
                     <tr>
                         <td id="pagenumber">1/1ページ</td>
@@ -110,7 +110,14 @@ try {
                         ?>
                         </td>
                         
-                        <td id="kisu">しばらくお待ちください。</td>
+                        <td id="msg">
+                        <?php if ($status == 0): ?>
+                            しばらくお待ちください。
+                        <?php else: ?>
+                            &nbsp; <!-- 空白を表示させるためのノンブレーキングスペース -->
+                        <?php endif; ?>
+                        </td>
+
                     </tr>
                     <?php endforeach; ?>
 
@@ -134,7 +141,15 @@ try {
                             }
                         ?>
                         </td>
-                        <td id="kisu">しばらくお待ちください。</td>
+                        
+                        <td id="msg">
+                        <?php if ($status == 0): ?>
+                            しばらくお待ちください。
+                        <?php else: ?>
+                            &nbsp; <!-- 空白を表示させるためのノンブレーキングスペース -->
+                        <?php endif; ?>
+                        </td>
+
                     </tr>
                     <?php endforeach; ?>
                     <tr>
