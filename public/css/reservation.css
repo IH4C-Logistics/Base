@@ -50,10 +50,10 @@ body {
   display: none;
   position: fixed;
   z-index: 15;
-  top: 20%;
+  top: 30%;
   left: 50%;
-  width: 90%;
-  height: 70%;
+  width: 80%;
+  height: auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
@@ -132,8 +132,8 @@ form input {
 
 .button {
   width: 100%;
-  padding: 14px;
-  margin-top: 20px;
+  padding: 10px;
+  margin-top: 10px;
   font-size: large;
   background-color: #999;
   color: white;

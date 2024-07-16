@@ -1,37 +1,111 @@
 * {
-    margin: 0;
-  }
-  
-  body {
-    background-color: #f0f0f0;
-    width: 100%;
-    height: 100vh;
-  }
-  
-  .header {
-    position: fixed;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: start;
-    background-color: #e0e0e0;
-  }
-  
-  .home {
-    padding: 20px;
-    font-size: large;
-    font-weight: bold;
-    text-decoration: none;
-    color: black;
-  }
-  .res_window {
-    padding: 20px;
-    font-size: large;
-    font-weight: bold;
-    text-decoration: none;
-    color: black;
-  }
-  .res_window:hover {
-    color: #999;
-  }
-  
+  margin: 0;
+}
+
+body {
+  background-color: #f0f0f0;
+  width: 100%;
+  height: 100vh;
+}
+
+.header {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: start;
+  background-color: #e0e0e0;
+}
+
+.home {
+  padding: 20px;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+.res_window {
+  padding: 20px;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+.res_window:hover {
+  color: #999;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #f0f0f0; /* 背景色を追加 */
+}
+
+#wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  background-color: #fff;
+  margin: auto;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* シャドウを追加 */
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* フォーム全体の幅を設定 */
+}
+
+.Form > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* スペースを均等に配分 */
+  flex-wrap: wrap; /* フレックスアイテムを折り返し可能に */
+}
+
+.Form > div > div {
+  flex: 1; /* フレックスアイテムを均等に広げる */
+  padding: 10px; /* パディングを追加 */
+  min-width: 400px; /* 最小幅を設定 */
+}
+
+.Form-Item {
+  padding: 10px 0;
+  width: 100%; /* アイテム全体の幅を設定 */
+}
+
+.Form-Item-Label {
+  font-size: 16px; /* フォントサイズを調整 */
+  margin-bottom: 5px; /* ラベル下のマージンを追加 */
+}
+
+.Form-Item-Input {
+  width: 100%; /* 入力フィールドの幅を設定 */
+  padding: 10px;
+  border: 1px solid #ccc; /* 境界線を追加 */
+  border-radius: 5px;
+  box-sizing: border-box; /* ボックスサイズを調整 */
+}
+
+.Form-Btn {
+  margin-top: 30px; /* ボタン上のマージンを追加 */
+  padding: 10px 20px;
+  width: 100%; /* ボタン全体の幅を設定 */
+  background-color: #007bff; /* ボタンの背景色を設定 */
+  color: #fff; /* ボタンの文字色を設定 */
+  border: none; /* ボーダーをなしに */
+  border-radius: 5px;
+  cursor: pointer; /* カーソルをポインターに */
+}
+
+.Form-Btn:hover {
+  background-color: #0056b3; /* ホバー時の背景色を変更 */
+}

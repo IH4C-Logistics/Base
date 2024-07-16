@@ -13,7 +13,7 @@
 <body>
 
   <nav class="header">
-    <a href="index.php" class="home">HOME</a>
+    <a href="index.php" class="home">戻る</a>
     <a class="res_window">新規予約</a>
   </nav>
     
