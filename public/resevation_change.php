@@ -122,5 +122,3 @@ $reservation = $stmt->fetch(PDO::FETCH_ASSOC); // 1行のみ取得
 </body>
 </html>
 
-
-?>
