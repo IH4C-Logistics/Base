@@ -221,23 +221,27 @@
                       break;
                   }
                 ?>
-                <th><?php echo htmlspecialchars($header); ?></th>
-                <?php endforeach; ?>
-              </tr>
-              <?php foreach ($result2 as $row): ?>
-              <tr>
-                <?php foreach ($row as $value): ?>
+              <th><?php echo htmlspecialchars($header); ?></th>
+            <?php endforeach; ?>
+          </tr>
+          <?php foreach ($result2 as $row): ?>
+            <tr>
+              <?php foreach ($row as $key => $value): ?>
+                <?php if ($key === 'random_number'): ?>
+                  <td><a href="resevationno_change.php?key=<?php echo $value; ?>"><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></a></td>
+                <?php else: ?>
                   <td><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></td>
-                <?php endforeach; ?>
-              </tr>
+                <?php endif; ?>
               <?php endforeach; ?>
-            </table>
-            <?php else: ?>
-              データがありません。
-            <?php endif; ?>
-          </div>
-        </div>
-      </div>
+            </tr>
+          <?php endforeach; ?>
+        </table>
+      <?php else: ?>
+        データがありません。
+      <?php endif; ?>
+    </div>
+  </div>
+</div>
 
 
       <?php
