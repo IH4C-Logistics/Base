@@ -159,7 +159,7 @@
               <tr>
                 <?php foreach ($row as $key => $value): ?>
                   <?php if ($key === 'contract_num'): ?>
-                    <td><a href="reservation_detail.php?contract_num=<?php echo htmlspecialchars($row['contract_num']); ?>"><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></a></td>
+                    <td><a href="resevation_change.php?key=<?php echo $value; ?>"><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></a></td>
                   <?php else: ?>
                     <td><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></td>
                   <?php endif; ?>
@@ -173,6 +173,7 @@
           </div>
         </div>
       </div>
+
 
 
       <div class="con">
@@ -318,7 +319,12 @@
           $('.res_modal').fadeOut();
           $('.modal').fadeOut();
       });
+
   </script>
+
+
+
+
 
 </body>
 </html>
