@@ -23,7 +23,8 @@ try{
             $chatid = 2;
         }
     
-    $sql = ("SELECT * FROM `t_chat` WHERE `player` = '".$chatid."' OR `c_Partner` = '".$chatid."' ORDER BY CAST(`time` AS TIME) ASC"); 
+    //$sql = ("SELECT * FROM `t_chat` WHERE `player` = '".$chatid."' OR `c_Partner` = '".$chatid."' ORDER BY CAST(`time` AS TIME) ASC"); 
+    $sql = ("SELECT * FROM `t_chat` WHERE `player` = '".$chatid."' OR `c_Partner` = '".$chatid."' ORDER BY `time` ASC");
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     $chat = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -70,7 +71,17 @@ try{
                 <?php $user = $item['u_Id']; ?>
                 <a href="chat.php?userID=<?php echo $user; ?>" class="button">
                     <h4><?php echo($item['u_Name']); ?></h4>
-                    <p>最新のチャット入れたいね♡</p>
+                    <p>
+                        <?php 
+                         // 作業中だよ触んないでね💩
+                         //   $sql = ("SELECT `text` FROM `t_chat` WHERE `player` = '".$user."' OR `c_Partner` = '".$user."' ORDER BY `time` DESC LIMIT 1");
+                         //   $stmt = $dbh->prepare($sql);
+                         //   $stmt->execute();
+                         //   $new_comment = $stmt->fetchAll();
+                         //   $new_comment1 = $new_comment[0];
+                         //   echo $new_comment1[0];
+                        ?>
+                    </p>
                 </a>
             </div>
         <?php
