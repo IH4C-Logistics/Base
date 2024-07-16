@@ -157,8 +157,12 @@
               </tr>
               <?php foreach ($result as $row): ?>
               <tr>
-                <?php foreach ($row as $value): ?>
-                  <td><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></td>
+                <?php foreach ($row as $key => $value): ?>
+                  <?php if ($key === 'contract_num'): ?>
+                    <td><a href="reservation_detail.php?contract_num=<?php echo htmlspecialchars($row['contract_num']); ?>"><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></a></td>
+                  <?php else: ?>
+                    <td><?php echo htmlspecialchars(mb_substr($value, 0, 20)); ?></td>
+                  <?php endif; ?>
                 <?php endforeach; ?>
               </tr>
               <?php endforeach; ?>
