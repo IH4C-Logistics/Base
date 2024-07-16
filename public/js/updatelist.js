@@ -77,10 +77,3 @@ function fetchData() {
     });
 }
 
-// ページが読み込まれたときにデータを取得
-$(document).ready(function() {
-    fetchData(); // 初回データ取得
-
-    // 5秒ごとにデータを更新
-    setInterval(fetchData, 5000);
-});
